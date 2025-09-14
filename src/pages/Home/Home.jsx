@@ -4,10 +4,15 @@ import Brand from "../../components/Brand/Brand";
 import Features from "../../components/Features/Features";
 import Categories from "../../components/Categories/Categories";
 import Introduction from "../../components/Introduction/Introduction";
+import { useSelector } from "react-redux";
 
 function Home() {
+
+  const statusTabCart = useSelector(store => store.cart.statusTab);
+
   return (
-    <div className="bg-white">
+    <div className={`bg-white m-auto max-w-full transform transition-transform duration-500
+      ${statusTabCart === false ? "" : "-translate-x-56"}`}>
       <div>
       {/* banner component */}
         <Banner/>

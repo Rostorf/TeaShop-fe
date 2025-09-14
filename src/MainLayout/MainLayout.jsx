@@ -14,6 +14,12 @@ import OolongTea from "../pages/Products/OolongTea"
 import WhiteTea from "../pages/Products/WhiteTea"
 import About from "../pages/About/About"
 import Detail from "../pages/Detail/Detail"
+import ProductList from "../pages/Products/ProductList"
+import CartTab from "../components/CartTab/CartTab"
+import PaymentProcess from "../pages/PaymentProcess/PaymentProcess"
+import Delivery from "../pages/Policy/Delivery"
+import Privacy from "../pages/Policy/Privacy"
+import Terms from "../pages/Policy/Terms"
 
 function MainLayout() {
   return (
@@ -31,23 +37,37 @@ function MainLayout() {
             }/>
             <Route path="home" element={<Home/>} />
             <Route path="about" element={<About/>} />
+
+            <Route path='productlist/:slug' element={<Detail/>} />
+
+            <Route path="productlist" element={<ProductList/>} />
             <Route path="products" element={<Products/>} />
               <Route path="greentea" element={<GreenTea/>}/>
               <Route path="hongtra" element={<HongTra/>}/>
               <Route path="oolongtea" element={<OolongTea/>}/>
               <Route path="whitetea" element={<WhiteTea/>}/>
-            <Route path='/:slug' element={<Detail/>} />
+
+            <Route path=':slug' element={<Detail/>} />
+            <Route path="paymentprocess" element={<PaymentProcess/>} />
+
+            <Route path="delivery" element={<Delivery />} />
+            <Route path="privacy" element={<Privacy />} />
+            <Route path="terms" element={<Terms />} />
+
           <Route path="auth" element={<Authenticator/>}>
             <Route path="login" element={<Login/>} />
             <Route path="register" element={<Register/>} />
-    
           </Route>
+
+
           {/* no routes found */}
           <Route path="*" element={<Error/>} />
         </Routes>
+        <CartTab/>
+        <Footer/> 
         </BrowserRouter>
 
-         <Footer/> 
+
 
     </div>
   )

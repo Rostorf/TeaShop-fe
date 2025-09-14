@@ -6,9 +6,27 @@ import PersonIcon from '@mui/icons-material/Person';
 import { Dropdown } from "antd";
 import { avatarDropdown, notLoginDropdown} from './DropdownItems/DropDownItems';
 import { useEffect, useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { toggleStatusTab } from '../../stores/cart';
 
 function Navbar() {
   const [isLoggedIn, setIsLoggedIn] = useState(true);
+
+  const carts = useSelector(store => store.cart.items);
+
+  const dispatch = useDispatch();
+
+  const handleOpenTabCart = () => {
+    dispatch(toggleStatusTab());
+  }
+
+  useEffect(() => {
+    let total = 0;
+    carts.forEach(item => total += item.quantity);
+    setTotalQuantity(total);
+  }, [carts])
+
+  const [totalQuantity, setTotalQuantity] = useState(0);
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -98,7 +116,7 @@ function Navbar() {
           <Dropdown className="text-sm text-white font-inter font-bold capitalize hover:text-green-300 transition-colors cursor-pointer" menu =
             {{ items: productDropdown}} trigger={['hover']} placement="bottom">
               <a onClick={(e) => { e.preventDefault();
-                                navigate("/products")}}>Sản phẩm</a>
+                                navigate("/productlist")}}>Sản phẩm</a>
           </Dropdown>
           <NavLink to='/accessories' className="text-sm text-white font-inter font-bold capitalize hover:text-green-300 transition-colors">
             Phụ kiện
@@ -111,10 +129,10 @@ function Navbar() {
           </button>
 
           <div className='w-10 h-10 rounded-full flex justify-center items-center relative'>        
-          <button className="text-white hover:text-green-300 transition-colors" aria-label="Shopping cart">
+          <button onClick={handleOpenTabCart} className="text-white hover:text-green-300 transition-colors" aria-label="Shopping cart">
             <ShoppingCartIcon/>
           </button>
-          <span className='absolute top-2/3 left-1/2 bg-red-500 text-white text-sm w-4 h-4 rounded-full flex justify-center items-center'></span>
+          <span className='absolute top-2/3 left-1/2 bg-red-500 text-white text-sm w-4 h-4 rounded-full flex justify-center items-center'>{totalQuantity}</span>
           </div>
 
           <div className="profile">

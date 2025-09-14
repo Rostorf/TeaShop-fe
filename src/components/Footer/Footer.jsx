@@ -6,8 +6,12 @@ import FacebookIcon from '@mui/icons-material/Facebook';
 import InstagramIcon from '@mui/icons-material/Instagram';
 import TwitterIcon from '@mui/icons-material/Twitter';
 import logo from '../../components/Images/logo.png';
+import { useNavigate } from "react-router-dom";
 
 export default function Footer() {
+
+    const navigate = useNavigate();
+
     return (
         <footer className="bg-[#3f584d] text-white p-10 grid grid-cols-4 mt-auto">
             <aside>
@@ -20,11 +24,11 @@ export default function Footer() {
             <nav className="regulations">
                 <h6 className="footer-title">Chính sách</h6>
                 <div className="space-y-3">
-                <a className="link link-hover hover:text-black transition-colors">Bảo mật thông tin</a>
+                <a onClick={() => {navigate('/privacy');}} className="link link-hover hover:text-black transition-colors">Bảo mật thông tin</a>
                 <br />
-                <a className="link link-hover hover:text-black transition-colors">Chính sách giao hàng</a>
+                <a onClick={() => {navigate('/delivery');}} className="link link-hover hover:text-black transition-colors">Chính sách giao hàng</a>
                 <br />
-                <a className="link link-hover hover:text-black transition-colors">Điều khoản</a>
+                <a onClick={() => {navigate('/terms');}} className="link link-hover hover:text-black transition-colors">Điều khoản</a>
                 </div>
             </nav>
             <nav className="">
